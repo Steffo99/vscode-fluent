@@ -1,15 +1,45 @@
 scopeName: source.ftl
 
 patterns:
-- include: "#comment"
+- include: "#comment-single"
+- include: "#comment-double"
+- include: "#comment-triple"
 - include: "#message"
 - include: "#wrong-line"
 
 repository:
-  comment:
-    name: comment.fluent
-    match: >-
-      ^##?#?\s.*$
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L75
+  comment-single:
+    begin: >-
+      ^(#(?!#))
+    end: >-
+      $
+    name: comment.line.number-sign.single.fluent
+    beginCaptures:
+      1: 
+        name: punctuation.definition.comment.number-sign.single.fluent
+  
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L75
+  comment-double:
+    begin: >-
+      ^(##(?!#))
+    end: >-
+      $
+    name: comment.line.number-sign.double.fluent
+    beginCaptures:
+      1: 
+        name: punctuation.definition.comment.number-sign.double.fluent
+  
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L75
+  comment-triple:
+    begin: >-
+      ^(###(?!#))
+    end: >-
+      $
+    name: comment.line.number-sign.triple.fluent
+    beginCaptures:
+      1: 
+        name: punctuation.definition.comment.number-sign.triple.fluent
 
   message:
     begin: >-

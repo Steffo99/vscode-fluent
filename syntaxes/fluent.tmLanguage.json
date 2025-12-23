@@ -2,7 +2,13 @@
   "scopeName": "source.ftl",
   "patterns": [
     {
-      "include": "#comment"
+      "include": "#comment-single"
+    },
+    {
+      "include": "#comment-double"
+    },
+    {
+      "include": "#comment-triple"
     },
     {
       "include": "#message"
@@ -12,9 +18,35 @@
     }
   ],
   "repository": {
-    "comment": {
-      "name": "comment.fluent",
-      "match": "^##?#?\\s.*$"
+    "comment-single": {
+      "begin": "^(#(?!#))",
+      "end": "$",
+      "contentName": "comment.line.number-sign.single.fluent",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.comment.number-sign.single.fluent"
+        }
+      }
+    },
+    "comment-double": {
+      "begin": "^(##(?!#))",
+      "end": "$",
+      "contentName": "comment.line.number-sign.double.fluent",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.comment.number-sign.double.fluent"
+        }
+      }
+    },
+    "comment-triple": {
+      "begin": "^(###(?!#))",
+      "end": "$",
+      "contentName": "comment.line.number-sign.triple.fluent",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.comment.number-sign.triple.fluent"
+        }
+      }
     },
     "message": {
       "begin": "^(-?[a-zA-Z][a-zA-Z0-9_-]*\\s*=\\s*)",
