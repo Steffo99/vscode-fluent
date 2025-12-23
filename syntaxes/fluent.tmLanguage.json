@@ -14,7 +14,7 @@
       "include": "#message"
     },
     {
-      "include": "#wrong-line"
+      "include": "#junk"
     }
   ],
   "repository": {
@@ -49,22 +49,19 @@
       }
     },
     "message": {
-      "begin": "^(-?[a-zA-Z][a-zA-Z0-9_-]*\\s*=\\s*)",
-      "end": "^(?=\\S)",
-      "beginCaptures": {
+      "match": "^\\s*([.-]?[a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.+)$",
+      "name": "meta.message.fluent",
+      "captures": {
         "1": {
-          "name": "support.class.message-identifier.fluent"
-        }
-      },
-      "contentName": "string.fluent",
-      "patterns": [
-        {
-          "include": "#attributes"
+          "name": "meta.identifier.fluent"
         },
-        {
-          "include": "#placeable"
+        "2": {
+          "name": "keyword.operator.assignment.fluent"
+        },
+        "3": {
+          "name": "meta.string.fluent"
         }
-      ]
+      }
     },
     "attributes": {
       "begin": "\\s*(\\.[a-zA-Z][a-zA-Z0-9_-]*\\s*=\\s*)",
@@ -220,9 +217,10 @@
         }
       ]
     },
-    "wrong-line": {
-      "match": ".*",
-      "name": "invalid.illegal.wrong-line.fluent"
+    "junk": {
+      "begin": "^",
+      "end": "[\\n\\u000A]$",
+      "name": "invalid.illegal.junk.line.fluent"
     },
     "invalid-placeable-wrong-placeable-missing-end": {
       "name": "invalid.illegal.wrong-placeable-missing-end.fluent",

@@ -5,7 +5,7 @@ patterns:
 - include: "#comment-double"
 - include: "#comment-triple"
 - include: "#message"
-- include: "#wrong-line"
+- include: "#junk"
 
 repository:
   # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L75
@@ -42,17 +42,16 @@ repository:
         name: punctuation.definition.comment.number-sign.triple.fluent
 
   message:
-    begin: >-
-      ^(-?[a-zA-Z][a-zA-Z0-9_-]*\s*=\s*)
-    end: >-
-      ^(?=\S)
-    beginCaptures:
+    match: >-
+      ^\s*([.-]?[a-zA-Z][a-zA-Z0-9_-]*)\s*(=)\s*(.+)$
+    name: meta.message.fluent
+    captures:
       1:
-        name: support.class.message-identifier.fluent
-    contentName: string.fluent
-    patterns:
-      - include: "#attributes"
-      - include: "#placeable"
+        name: meta.identifier.fluent
+      2:
+        name: keyword.operator.assignment.fluent
+      3:
+        name: meta.string.fluent
 
   attributes:
     begin: >-
@@ -179,10 +178,13 @@ repository:
     patterns:
       - include: "#placeable"
 
-  wrong-line:
-    match: >-
-      .*
-    name: invalid.illegal.wrong-line.fluent
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L103
+  junk:
+    begin: >-
+      ^
+    end: >-
+      [\n\u000A]$
+    name: invalid.illegal.junk.line.fluent
 
   invalid-placeable-wrong-placeable-missing-end:
     name: invalid.illegal.wrong-placeable-missing-end.fluent
