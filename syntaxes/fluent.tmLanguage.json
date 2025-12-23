@@ -14,6 +14,12 @@
       "include": "#message"
     },
     {
+      "include": "#term"
+    },
+    {
+      "include": "#attribute"
+    },
+    {
       "include": "#junk"
     }
   ],
@@ -21,7 +27,7 @@
     "comment-single": {
       "begin": "^(#(?!#))",
       "end": "$",
-      "contentName": "comment.line.number-sign.single.fluent",
+      "name": "comment.line.number-sign.single.fluent",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.number-sign.single.fluent"
@@ -31,7 +37,7 @@
     "comment-double": {
       "begin": "^(##(?!#))",
       "end": "$",
-      "contentName": "comment.line.number-sign.double.fluent",
+      "name": "comment.line.number-sign.double.fluent",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.number-sign.double.fluent"
@@ -41,7 +47,7 @@
     "comment-triple": {
       "begin": "^(###(?!#))",
       "end": "$",
-      "contentName": "comment.line.number-sign.triple.fluent",
+      "name": "comment.line.number-sign.triple.fluent",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.number-sign.triple.fluent"
@@ -49,33 +55,55 @@
       }
     },
     "message": {
-      "match": "^\\s*([.-]?[a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.+)$",
+      "match": "^\\s*([a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.+)$",
       "name": "meta.message.fluent",
       "captures": {
         "1": {
-          "name": "meta.identifier.fluent"
+          "name": "meta.identifier.message.fluent"
         },
         "2": {
           "name": "keyword.operator.assignment.fluent"
         },
         "3": {
-          "name": "meta.string.fluent"
+          "name": "meta.pattern.message.fluent"
         }
       }
     },
-    "attributes": {
-      "begin": "\\s*(\\.[a-zA-Z][a-zA-Z0-9_-]*\\s*=\\s*)",
-      "end": "^(?=\\s*[^\\.])",
-      "beginCaptures": {
+    "term": {
+      "match": "^\\s*(-)([a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.+)$",
+      "name": "meta.term.fluent",
+      "captures": {
         "1": {
-          "name": "support.class.attribute-begin.fluent"
+          "name": "punctuation.definition.term.fluent"
+        },
+        "2": {
+          "name": "meta.identifier.term.fluent"
+        },
+        "3": {
+          "name": "keyword.operator.assignment.fluent"
+        },
+        "4": {
+          "name": "meta.pattern.term.fluent"
         }
-      },
-      "patterns": [
-        {
-          "include": "#placeable"
+      }
+    },
+    "attribute": {
+      "match": "^\\s*(.)([a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.+)$",
+      "name": "meta.attribute.fluent",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.attribute.fluent"
+        },
+        "2": {
+          "name": "meta.identifier.attribute.fluent"
+        },
+        "3": {
+          "name": "keyword.operator.assignment.fluent"
+        },
+        "4": {
+          "name": "meta.pattern.attribute.fluent"
         }
-      ]
+      }
     },
     "placeable": {
       "begin": "({)",

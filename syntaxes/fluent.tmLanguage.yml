@@ -5,6 +5,8 @@ patterns:
 - include: "#comment-double"
 - include: "#comment-triple"
 - include: "#message"
+- include: "#term"
+- include: "#attribute"
 - include: "#junk"
 
 repository:
@@ -41,28 +43,48 @@ repository:
       1: 
         name: punctuation.definition.comment.number-sign.triple.fluent
 
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L43
   message:
     match: >-
-      ^\s*([.-]?[a-zA-Z][a-zA-Z0-9_-]*)\s*(=)\s*(.+)$
+      ^\s*([a-zA-Z][a-zA-Z0-9_-]*)\s*(=)\s*(.+)$
     name: meta.message.fluent
     captures:
       1:
-        name: meta.identifier.fluent
+        name: meta.identifier.message.fluent
       2:
-        name: keyword.operator.assignment.fluent
+        name: keyword.operator.assignment.message.fluent
       3:
-        name: meta.string.fluent
-
-  attributes:
-    begin: >-
-      \s*(\.[a-zA-Z][a-zA-Z0-9_-]*\s*=\s*)
-    end: >-
-      ^(?=\s*[^\.])
-    beginCaptures:
-      1:
-        name: support.class.attribute-begin.fluent
-    patterns:
-      - include: "#placeable"
+        name: meta.pattern.message.fluent
+  
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L60
+  term:
+    match: >-
+      ^\s*(-)([a-zA-Z][a-zA-Z0-9_-]*)\s*(=)\s*(.+)$
+    name: meta.term.fluent
+    captures:
+      1: 
+        name: punctuation.definition.term.fluent
+      2:
+        name: meta.identifier.term.fluent
+      3:
+        name: keyword.operator.assignment.term.fluent
+      4:
+        name: meta.pattern.term.fluent
+  
+  # https://github.com/projectfluent/fluent/blob/10a1bc60bee843c14a30216fa4cebdc559bf2076/syntax/grammar.js#L126
+  attribute:
+    match: >-
+      ^\s*(.)([a-zA-Z][a-zA-Z0-9_-]*)\s*(=)\s*(.+)$
+    name: meta.attribute.fluent
+    captures:
+      1: 
+        name: punctuation.definition.attribute.fluent
+      2:
+        name: meta.identifier.attribute.fluent
+      3:
+        name: keyword.operator.assignment.attribute.fluent
+      4:
+        name: meta.pattern.attribute.fluent
 
   placeable:
     begin: >-
